@@ -5,23 +5,23 @@ include("connector.php");
 include("functions.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
 
-    if (!is_numeric($email)) {
-      $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+  if (!is_numeric($email)) {
+    $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
 
-      $result = mysqli_query($con, $query);
-      if ($result && mysqli_num_rows($result) > 0) {
-        $user_data = mysqli_fetch_assoc($result);
-        if ($user_data["password"] == $password) {
-          $_SESSION["user_id"] = $user_data["user_id"];
-          header("Location: index.php");
-          die();
-        }
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+      $user_data = mysqli_fetch_assoc($result);
+      if ($user_data["password"] == $password) {
+        $_SESSION["user_id"] = $user_data["user_id"];
+        header("Location: index.php");
+        die();
       }
-      
     }
+
+  }
 }
 ?>
 
@@ -49,14 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-6">
               <input type="email" name="email"
                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                placeholder="Email address" required/>
+                placeholder="Email address" required />
             </div>
 
             <!-- Password input -->
             <div class="mb-6">
               <input type="password" name="password"
                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                placeholder="Password" required/>
+                placeholder="Password" required />
             </div>
 
             <div class="flex justify-between items-center mb-6">
